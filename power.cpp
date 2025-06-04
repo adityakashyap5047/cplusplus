@@ -24,6 +24,19 @@ int powerMem(int base, int exp, int pow[]){
     return pow[exp];
 }
 
+int powerTab(int base, int exp){
+    int *powTab = new int[exp + 1]();
+    for (int i = 0; i <= exp; i++){
+        if(i == 0){
+            powTab[i] = 1;
+        }else{
+            powTab[i] = base * powTab[i - 1];
+        }
+    }
+    delete[] powTab;
+    return powTab[exp];
+}
+
 int main(){
     int base, exp;
     cout << "Enter base: ";
@@ -35,11 +48,11 @@ int main(){
 
     int result = power(base, exp);
     cout << "Result: " << result << endl;
-    cout << "Memoized Result: " << powerMem(base, exp, pow);
+    cout << "Memoized Result: " << powerMem(base, exp, pow) << endl;
+    cout << "Tabulated Result: " << powerTab(base, exp) << endl;
 
     cout << endl;
 
     delete[] pow;
-
     return 0;
 }
